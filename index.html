@@ -30,6 +30,16 @@
     <div class="bottom">
     </div>
     <script>
+        let todoList = document.getElementsByTagName("li");
+        let lenList = todoList.length;
+        let deleteEle = document.getElementsByClassName("glyphicon glyphicon-trash");
+        for(let i = 0; i < lenList; i++){
+            deleteEle[i].onclick = function () {
+                let div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+
         function addNewElement() {
             let todoList = document.getElementsByTagName("li");
             let lenList = todoList.length;
@@ -60,7 +70,21 @@
                 document.getElementById("list").appendChild(li);
 
             document.getElementById("new-todo").value = '';
+
+            console.log(spanTrash.length);
+            // for(let i = 0; i < spanTrash.className.length; i++){
+            //     spanTrash[i].onclick = function () {
+            //         let div = this.parentElement;
+            //         div.style.display = "none";
+            //     }
+            // }
         }
+        
+        // function deleteElement() {
+        //
+        //
+        //
+        // }
     </script>
 </body>
 </html>
