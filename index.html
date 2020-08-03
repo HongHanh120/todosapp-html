@@ -21,20 +21,8 @@
                 <li>
                     <input type="checkbox" id="todo1" value="Cook">
                     <label for="todo1" id="label1">I have to cook</label>
-<!--                    <span class="glyphicon glyphicon-pencil"></span>-->
-<!--                    <span class="glyphicon glyphicon-trash"></span>-->
-                </li>
-                <li>
-                    <input type="checkbox" id="todo2" value="Study">
-                    <label for="todo2" id="label2">I have to study</label>
-<!--                    <span class="glyphicon glyphicon-pencil"></span>-->
-<!--                    <span class="glyphicon glyphicon-trash"></span>-->
-                </li>
-                <li>
-                    <input type="checkbox" id="todo3" value="Wash the dishes">
-                    <label for="todo3" id="label3">I have to wash the dishes</label>
-<!--                    <span class="glyphicon glyphicon-pencil"></span>-->
-<!--                    <span class="glyphicon glyphicon-trash"></span>-->
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="glyphicon glyphicon-trash"></span>
                 </li>
             </ul>
         </div>
@@ -42,26 +30,29 @@
     <div class="bottom">
     </div>
     <script>
-        let todoList = document.getElementsByTagName("li");
-        lenList = todoList.length;
-
         function addNewElement() {
-            let li = document.createElement("li");
+            let todoList = document.getElementsByTagName("li");
+            let lenList = todoList.length;
 
             let checkbox = document.createElement("input");
             checkbox.setAttribute("type", "checkbox");
             checkbox.id = 'todo'+ (lenList + 1);
-            li.appendChild(checkbox);
 
             let label = document.createElement("label");
             label.id = 'label'+ (lenList + 1);
             label.htmlFor = checkbox.id;
+            label.innerHTML = document.getElementById("new-todo").value;
 
-            let newLabel = document.getElementById(label.id);
-            let inputValue = document.getElementById("new-todo").value;
-            newLabel.innerHTML = inputValue;
+            let spanPencil = document.createElement("span");
+            spanPencil.className = "glyphicon glyphicon-pencil";
+            let spanTrash = document.createElement("span");
+            spanTrash.className = "glyphicon glyphicon-trash";
 
+            let li = document.createElement("li");
+            li.appendChild(checkbox);
             li.appendChild(label);
+            li.appendChild(spanPencil);
+            li.appendChild(spanTrash);
 
             if (document.getElementById("new-todo").value === '')
                 alert("You must write something");
