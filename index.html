@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="top">
+        <h1>Todos App</h1>
+    </div>
+    <div class="middle">
+        <div class="add-todo">
+            <label for="new-todo">New Todo:</label><br>
+            <input placeholder="Title..." type="text" id="new-todo" name="newTodo">
+            <button id="bt-add" onclick="addNewElement()">Add</button>
+        </div>
+        <div class="todo-list">
+            <ul id="list">
+                <li>
+                    <input type="checkbox" id="todo1" value="Cook">
+                    <label for="todo1" id="label1">I have to cook</label>
+<!--                    <span class="glyphicon glyphicon-pencil"></span>-->
+<!--                    <span class="glyphicon glyphicon-trash"></span>-->
+                </li>
+                <li>
+                    <input type="checkbox" id="todo2" value="Study">
+                    <label for="todo2" id="label2">I have to study</label>
+<!--                    <span class="glyphicon glyphicon-pencil"></span>-->
+<!--                    <span class="glyphicon glyphicon-trash"></span>-->
+                </li>
+                <li>
+                    <input type="checkbox" id="todo3" value="Wash the dishes">
+                    <label for="todo3" id="label3">I have to wash the dishes</label>
+<!--                    <span class="glyphicon glyphicon-pencil"></span>-->
+<!--                    <span class="glyphicon glyphicon-trash"></span>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="bottom">
+    </div>
+    <script>
+        let todoList = document.getElementsByTagName("li");
+        lenList = todoList.length;
+
+        function addNewElement() {
+            let li = document.createElement("li");
+
+            let checkbox = document.createElement("input");
+            checkbox.setAttribute("type", "checkbox");
+            checkbox.id = 'todo'+ (lenList + 1);
+            li.appendChild(checkbox);
+
+            let label = document.createElement("label");
+            label.id = 'label'+ (lenList + 1);
+            label.htmlFor = checkbox.id;
+
+            let newLabel = document.getElementById(label.id);
+            let inputValue = document.getElementById("new-todo").value;
+            newLabel.innerHTML = inputValue;
+
+            li.appendChild(label);
+
+            if (document.getElementById("new-todo").value === '')
+                alert("You must write something");
+            else
+                document.getElementById("list").appendChild(li);
+
+            document.getElementById("new-todo").value = '';
+        }
+    </script>
+</body>
+</html>
