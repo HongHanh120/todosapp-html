@@ -31,28 +31,53 @@
     </div>
     <script>
         function addNewElement() {
-            let todoList = document.getElementsByTagName("li");
+            let todoList = document.getElementsByTagName("LI");
             let lenList = todoList.length;
 
-            let checkbox = document.createElement("input");
+            let checkbox = document.createElement("INPUT");
             checkbox.setAttribute("type", "checkbox");
             checkbox.id = 'todo'+ (lenList + 1);
+            checkbox.style.display = "inline";
 
-            let label = document.createElement("label");
+            let label = document.createElement("LABEL");
             label.id = 'label'+ (lenList + 1);
             label.htmlFor = checkbox.id;
             label.innerHTML = document.getElementById("new-todo").value;
+            label.style.display = "inline";
 
-            let spanPencil = document.createElement("span");
+            let spanPencil = document.createElement("SPAN");
             spanPencil.className = "glyphicon glyphicon-pencil";
-            let spanTrash = document.createElement("span");
+            spanPencil.style.display = "inline";
+            let spanTrash = document.createElement("SPAN");
             spanTrash.className = "glyphicon glyphicon-trash";
+            spanTrash.style.display = "inline";
 
-            let li = document.createElement("li");
+            let li = document.createElement("LI");
             li.appendChild(checkbox);
             li.appendChild(label);
             li.appendChild(spanPencil);
             li.appendChild(spanTrash);
+
+            let labelEdit = document.createElement("LABEL");
+            let inputText = document.createElement("INPUT");
+            inputText.setAttribute("type", "text");
+            inputText.id = "editText" + (lenList + 1);
+            inputText.style.display = "none";
+
+            labelEdit.htmlFor = inputText.id;
+            labelEdit.innerHTML = "Edit: ";
+            labelEdit.id = "labelEdit" + (lenList + 1);
+            labelEdit.style.display = "none";
+
+
+            let button = document.createElement("BUTTON");
+            button.id = "buttonSave" + (lenList + 1);
+            button.innerHTML = "Save";
+            button.style.display = "none";
+
+            li.appendChild(labelEdit);
+            li.appendChild(inputText);
+            li.appendChild(button);
 
             if (document.getElementById("new-todo").value === '')
                 alert("You must write something");
@@ -62,9 +87,13 @@
             document.getElementById("new-todo").value = '';
 
             deleteElement();
+
+            editElement();
         }
 
         deleteElement();
+
+        editElement();
         
         function deleteElement() {
             let deleteEle = document.getElementsByClassName("glyphicon glyphicon-trash");
@@ -72,6 +101,39 @@
                 deleteEle[i].onclick = function () {
                     let div = this.parentElement;
                     div.style.display = "none";
+                }
+            }
+        }
+
+        function editElement() {
+            let editEle = document.getElementsByClassName("glyphicon glyphicon-pencil");
+            for(let i = 0; i < editEle.length; i++){
+                editEle[i].onclick = function () {
+                    document.getElementById("todo" + (i + 1)).style.display = "none";
+                    document.getElementById("label" + (i + 1)).style.display = "none";
+                    document.getElementsByClassName("glyphicon glyphicon-pencil")[i].style.display = "none";
+                    document.getElementsByClassName("glyphicon glyphicon-trash")[i].style.display = "none";
+
+                    document.getElementById("labelEdit" + (i + 1)).style.display = "inline";
+                    document.getElementById("editText" + (i + 1)).style.display = "inline";
+                    document.getElementById("buttonSave" + (i + 1)).style.display = "inline";
+
+                    let oldText = document.getElementById("label" + (i + 1));
+                    let newText = document.getElementById("editText" + (i + 1));
+                    newText.value = oldText.innerHTML;
+
+                    document.getElementById("buttonSave" + (i + 1)).onclick = function () {
+                        oldText.innerHTML = newText.value;
+
+                        document.getElementById("todo" + (i + 1)).style.display = "inline";
+                        document.getElementById("label" + (i + 1)).style.display = "inline";
+                        document.getElementsByClassName("glyphicon glyphicon-pencil")[i].style.display = "inline";
+                        document.getElementsByClassName("glyphicon glyphicon-trash")[i].style.display = "inline";
+
+                        document.getElementById("labelEdit" + (i + 1)).style.display = "none";
+                        document.getElementById("editText" + (i + 1)).style.display = "none";
+                        document.getElementById("buttonSave" + (i + 1)).style.display = "none";
+                    };
                 }
             }
         }
