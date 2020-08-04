@@ -18,12 +18,6 @@
         </div>
         <div class="todo-list">
             <ul id="list">
-                <li>
-                    <input type="checkbox" id="todo1" value="Cook">
-                    <label for="todo1" id="label1">I have to cook</label>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    <span class="glyphicon glyphicon-trash"></span>
-                </li>
             </ul>
         </div>
     </div>
@@ -53,6 +47,9 @@
             spanTrash.style.display = "inline";
 
             let li = document.createElement("LI");
+            //li.textContent = "Test";
+            //console.log(typeof li);
+
             li.appendChild(checkbox);
             li.appendChild(label);
             li.appendChild(spanPencil);
