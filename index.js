@@ -8,8 +8,7 @@ function addTodo() {
         is_checked: false
     };
 
-    let inputValue = document.getElementById("todoInput").value;
-    todo.content = inputValue;
+    todo.content = document.getElementById("todoInput").value;
 
     todoList.push(todo);
 
@@ -24,16 +23,17 @@ function printTodos() {
         let checkbox = document.createElement("INPUT");
         checkbox.setAttribute("type", "checkbox");
         checkbox.id = 'checkbox'+ (i + 1);
+        checkbox.name = "checkbox";
         checkbox.style.display = "inline";
 
         let pencilSpan = document.createElement("SPAN");
         pencilSpan.className = "glyphicon glyphicon-pencil";
         pencilSpan.style.display = "inline";
+        pencilSpan.onclick = () => editContent(i);
 
         let trashSpan = document.createElement("SPAN");
         trashSpan.className = "glyphicon glyphicon-trash";
         trashSpan.style.display = "inline";
-        //trashSpan.addEventListener("click", deleteTodo);
         trashSpan.onclick = () => deleteTodo(i);
 
         let inputText = document.createElement("INPUT");
@@ -48,7 +48,7 @@ function printTodos() {
         labelEdit.style.display = "none";
 
         let saveButton = document.createElement("BUTTON");
-        saveButton.id = "buttonSave" + (i + 1);
+        saveButton.id = "button" + (i + 1);
         saveButton.innerHTML = "Save";
         saveButton.style.display = "none";
 
@@ -74,6 +74,31 @@ function deleteTodo(id) {
     if(index > -1)
         todoList.splice(index, 1);
     printTodos();
+}
+
+function editContent(id) {
+    let ul = document.getElementById("list");
+    let li = ul.children;
+
+    let ck = li[id].querySelector("text");
+    console.log(ck);
+    document.getElementById("checkbox" + (id + 1)).style.display = "none";
+    document.getElementsByClassName("glyphicon glyphicon-pencil")[id].style.display = "none";
+    document.getElementsByClassName("glyphicon glyphicon-trash")[id].style.display = "none";
+
+    document.getElementById("label" + (id + 1)).style.display = "inline";
+    document.getElementById("text" + (id + 1)).style.display = "inline";
+    document.getElementById("button" + (id + 1)).style.display = "inline";
+
+    let oldText = todoList[id].content;
+    let newText = document.getElementById("text" + (id + 1));
+    newText.value = oldText;
+
+    document.getElementById("button" + (id + 1)).onclick = function () {
+        todoList[id].content = newText.value;
+        printTodos()
+    };
+
 }
 
 function clear () {
