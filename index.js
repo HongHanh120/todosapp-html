@@ -25,6 +25,25 @@ function printTodos() {
         checkbox.id = 'checkbox'+ (i + 1);
         checkbox.name = "checkbox";
         checkbox.style.display = "inline";
+        checkbox.onclick = function(e){
+            if(this.checked) {
+                if(!todoList[i].is_checked)
+                    todoList[i].is_checked = true;
+            }
+            else{
+                if(todoList[i].is_checked)
+                    todoList[i].is_checked = false;
+            }
+            alert(todoList[i].is_checked);
+            //printTodos()
+        };
+
+
+        let label = document.createElement("LABEL");
+        label.id = 'content'+ (i + 1);
+        label.htmlFor = checkbox.id;
+        label.innerHTML = todoList[i].content;
+        label.style.display = "inline";
 
         let pencilSpan = document.createElement("SPAN");
         pencilSpan.className = "glyphicon glyphicon-pencil";
@@ -54,7 +73,7 @@ function printTodos() {
 
         let li = document.createElement("LI");
         li.appendChild(checkbox);
-        li.appendChild(document.createTextNode(todoList[i].content));
+        li.appendChild(label);
         li.appendChild(pencilSpan);
         li.appendChild(trashSpan);
         li.appendChild(labelEdit);
@@ -77,12 +96,8 @@ function deleteTodo(id) {
 }
 
 function editContent(id) {
-    let ul = document.getElementById("list");
-    let li = ul.children;
-
-    let ck = li[id].querySelector("text");
-    console.log(ck);
     document.getElementById("checkbox" + (id + 1)).style.display = "none";
+    document.getElementById("content" + (id + 1)).style.display = "none";
     document.getElementsByClassName("glyphicon glyphicon-pencil")[id].style.display = "none";
     document.getElementsByClassName("glyphicon glyphicon-trash")[id].style.display = "none";
 
@@ -98,8 +113,20 @@ function editContent(id) {
         todoList[id].content = newText.value;
         printTodos()
     };
-
 }
+
+// function handleChange(id, element) {
+//     if(todoList[id].is_checked === false) {
+//         this.checked = true;
+//         todoList[id].is_checked = true;
+//         console.log("true");
+//     }
+//     else {
+//         this.checked = false;
+//         todoList[id].is_checked = false;
+//     }
+//     printTodos()
+// }
 
 function clear () {
     document.getElementById("todoInput").value = "";
