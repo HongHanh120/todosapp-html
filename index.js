@@ -24,7 +24,6 @@ function printTodos() {
         checkbox.setAttribute("type", "checkbox");
         checkbox.id = 'checkbox'+ (i + 1);
         checkbox.name = "checkbox";
-        checkbox.style.display = "inline";
         checkbox.addEventListener("change", ev => {
             handleChange(ev, i);
         });
@@ -34,33 +33,28 @@ function printTodos() {
         label.id = 'content'+ (i + 1);
         label.htmlFor = checkbox.id;
         label.innerHTML = todoList[i].content;
-        label.style.display = "inline";
 
         let pencilSpan = document.createElement("SPAN");
         pencilSpan.className = "glyphicon glyphicon-pencil";
-        pencilSpan.style.display = "inline";
         pencilSpan.onclick = () => editContent(i);
 
         let trashSpan = document.createElement("SPAN");
         trashSpan.className = "glyphicon glyphicon-trash";
-        trashSpan.style.display = "inline";
         trashSpan.onclick = () => deleteTodo(i);
 
         let inputText = document.createElement("INPUT");
         inputText.setAttribute("type", "text");
         inputText.id = "text" + (i + 1);
-        inputText.style.display = "none";
 
         let labelEdit = document.createElement("LABEL");
         labelEdit.htmlFor = inputText.id;
         labelEdit.innerHTML = "Edit: ";
         labelEdit.id = "label" + (i + 1);
-        labelEdit.style.display = "none";
 
         let saveButton = document.createElement("BUTTON");
         saveButton.id = "button" + (i + 1);
         saveButton.innerHTML = "Save";
-        saveButton.style.display = "none";
+
 
         let li = document.createElement("LI");
         li.appendChild(checkbox);
@@ -72,6 +66,7 @@ function printTodos() {
         li.appendChild(saveButton);
 
         list.appendChild(li);
+        displayDefault(i);
     }
 }
 
@@ -87,14 +82,7 @@ function deleteTodo(id) {
 }
 
 function editContent(id) {
-    document.getElementById("checkbox" + (id + 1)).style.display = "none";
-    document.getElementById("content" + (id + 1)).style.display = "none";
-    document.getElementsByClassName("glyphicon glyphicon-pencil")[id].style.display = "none";
-    document.getElementsByClassName("glyphicon glyphicon-trash")[id].style.display = "none";
-
-    document.getElementById("label" + (id + 1)).style.display = "inline";
-    document.getElementById("text" + (id + 1)).style.display = "inline";
-    document.getElementById("button" + (id + 1)).style.display = "inline";
+    showEditForm(id);
 
     let oldText = todoList[id].content;
     let newText = document.getElementById("text" + (id + 1));
@@ -116,6 +104,28 @@ function handleChange(event, id){
             todoList[id].is_checked = false;
     }
     console.log(todoList[id].is_checked)
+}
+
+function displayDefault(id) {
+    document.getElementById("checkbox" + (id + 1)).style.display = "inline";
+    document.getElementById("content" + (id + 1)).style.display = "inline";
+    document.getElementsByClassName("glyphicon glyphicon-pencil")[id].style.display = "inline";
+    document.getElementsByClassName("glyphicon glyphicon-trash")[id].style.display = "inline";
+
+    document.getElementById("label" + (id + 1)).style.display = "none";
+    document.getElementById("text" + (id + 1)).style.display = "none";
+    document.getElementById("button" + (id + 1)).style.display = "none";
+}
+
+function showEditForm(id) {
+    document.getElementById("checkbox" + (id + 1)).style.display = "none";
+    document.getElementById("content" + (id + 1)).style.display = "none";
+    document.getElementsByClassName("glyphicon glyphicon-pencil")[id].style.display = "none";
+    document.getElementsByClassName("glyphicon glyphicon-trash")[id].style.display = "none";
+
+    document.getElementById("label" + (id + 1)).style.display = "inline";
+    document.getElementById("text" + (id + 1)).style.display = "inline";
+    document.getElementById("button" + (id + 1)).style.display = "inline";
 }
 
 function clear () {
