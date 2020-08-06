@@ -25,19 +25,10 @@ function printTodos() {
         checkbox.id = 'checkbox'+ (i + 1);
         checkbox.name = "checkbox";
         checkbox.style.display = "inline";
-        checkbox.onclick = function(e){
-            if(this.checked) {
-                if(!todoList[i].is_checked)
-                    todoList[i].is_checked = true;
-            }
-            else{
-                if(todoList[i].is_checked)
-                    todoList[i].is_checked = false;
-            }
-            alert(todoList[i].is_checked);
-            //printTodos()
-        };
-
+        checkbox.addEventListener("change", ev => {
+            handleChange(ev, i);
+        });
+        checkbox.checked = todoList[i].is_checked;
 
         let label = document.createElement("LABEL");
         label.id = 'content'+ (i + 1);
@@ -115,18 +106,17 @@ function editContent(id) {
     };
 }
 
-// function handleChange(id, element) {
-//     if(todoList[id].is_checked === false) {
-//         this.checked = true;
-//         todoList[id].is_checked = true;
-//         console.log("true");
-//     }
-//     else {
-//         this.checked = false;
-//         todoList[id].is_checked = false;
-//     }
-//     printTodos()
-// }
+function handleChange(event, id){
+    if(event.target.checked){
+        if(todoList[id].is_checked === false)
+            todoList[id].is_checked = true;
+    }
+    else{
+        if(todoList[id].is_checked === true)
+            todoList[id].is_checked = false;
+    }
+    console.log(todoList[id].is_checked)
+}
 
 function clear () {
     document.getElementById("todoInput").value = "";
