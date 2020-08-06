@@ -1,18 +1,26 @@
 let todoList = [];
 
+// window.addEventListener("load", () => {
+//     localStorage.setItem("todoList", JSON.stringify(todoList));
+//     let test = localStorage.getItem("todoList");
+//     console.log("todosList: ", JSON.parse(test));
+//
+//     printTodos();
+// });
+
 function addTodo() {
     let lenList = todoList.length;
     let todo = {
         id: lenList + 1,
-        content: "this is the content",
+        content: document.getElementById("todoInput").value,
         is_checked: false
     };
 
-    todo.content = document.getElementById("todoInput").value;
-
     todoList.push(todo);
 
-    return clear();
+    clear();
+
+    printTodos();
 }
 
 function printTodos() {
@@ -71,10 +79,6 @@ function printTodos() {
 }
 
 function deleteTodo(id) {
-    let ul = document.getElementById("list");
-    let li = ul.children;
-
-    ul.removeChild(li[id]);
     let index = todoList.indexOf(todoList[id]);
     if(index > -1)
         todoList.splice(index, 1);
