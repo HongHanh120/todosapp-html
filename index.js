@@ -1,26 +1,35 @@
-let todoList = [];
+let todoList = sessionStorage.getItem("todoList")
+    ? JSON.parse((sessionStorage.getItem("todoList"))) : [];
 
-// window.addEventListener("load", () => {
-//     localStorage.setItem("todoList", JSON.stringify(todoList));
-//     let test = localStorage.getItem("todoList");
-//     console.log("todosList: ", JSON.parse(test));
-//
-//     printTodos();
-// });
+const form = document.querySelector("form");
+
+sessionStorage.setItem("todoList", JSON.stringify(todoList));
+const retrievedTodoList = JSON.parse(sessionStorage.getItem("todoList"));
+//console.log(retrievedTodoList);
+
+form.addEventListener("click", function (ev) {
+    updateStorage(ev);
+});
+
+retrievedTodoList.forEach((item) => printTodos());
 
 function addTodo() {
     let lenList = todoList.length;
-    let todo = {
-        id: lenList + 1,
-        content: document.getElementById("todoInput").value,
-        is_checked: false
-    };
+    if(document.getElementById("todoInput").value === '')
+        alert("Your input is empty");
+    else {
+        let todo = {
+            id: lenList + 1,
+            content: document.getElementById("todoInput").value,
+            is_checked: false
+        };
 
-    todoList.push(todo);
+        todoList.push(todo);
 
-    clear();
+        clear();
 
-    printTodos();
+        printTodos();
+    }
 }
 
 function printTodos() {
@@ -34,6 +43,7 @@ function printTodos() {
         checkbox.name = "checkbox";
         checkbox.addEventListener("change", ev => {
             handleChange(ev, i);
+            updateStorage(ev);
         });
         checkbox.checked = todoList[i].is_checked;
 
@@ -48,7 +58,10 @@ function printTodos() {
 
         let trashSpan = document.createElement("SPAN");
         trashSpan.className = "glyphicon glyphicon-trash";
-        trashSpan.onclick = () => deleteTodo(i);
+        trashSpan.addEventListener("click", ev => {
+            deleteTodo(i);
+            updateStorage(ev);
+        });
 
         let inputText = document.createElement("INPUT");
         inputText.setAttribute("type", "text");
@@ -92,10 +105,11 @@ function editContent(id) {
     let newText = document.getElementById("text" + (id + 1));
     newText.value = oldText;
 
-    document.getElementById("button" + (id + 1)).onclick = function () {
+    document.getElementById("button" + (id + 1)).addEventListener("click", ev => {
         todoList[id].content = newText.value;
-        printTodos()
-    };
+        updateStorage(ev);
+        printTodos();
+    })
 }
 
 function handleChange(event, id){
@@ -107,7 +121,7 @@ function handleChange(event, id){
         if(todoList[id].is_checked === true)
             todoList[id].is_checked = false;
     }
-    console.log(todoList[id].is_checked)
+    //console.log(todoList[id].is_checked)
 }
 
 function displayDefault(id) {
@@ -134,5 +148,10 @@ function showEditForm(id) {
 
 function clear () {
     document.getElementById("todoInput").value = "";
+}
+
+function updateStorage(ev){
+    ev.preventDefault();
+    sessionStorage.setItem("todoList", JSON.stringify(todoList));
 }
 
