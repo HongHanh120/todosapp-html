@@ -20,14 +20,38 @@ function renderTodos() {
         li.appendChild(span);
         list.appendChild(li);
 
-        list.addEventListener("click", ev => {
-            if(ev.target.tagName === "LI"){
-                ev.target.classList.toggle("checked");
-                handleChange(ev, i);
-            }
-        }, false)
+        // list.addEventListener("click", ev => {
+        //     if(ev.target.tagName === "LI"){
+        //         handleChange(ev, i);
+        //     }
+        //     //liList[i].checked = todoList[i].is_checked;
+        // });
+        let liList = document.querySelectorAll("LI");
+        liList[i].addEventListener("click", (ev) => {
+            handleChange(ev, i);
+        }, false);
+        liList[i] = todoList[i].is_checked;
     }
+
+
+
+    // for(let i = 0; i < todoList.length; i++){
+    //
+    // }
+
+    // list.addEventListener("click", (ev) => {
+    //     if(ev.target === "LI"){
+    //         ev.target.classList.toggle("checked");
+    //     }
+    // })
 }
+// let list = document.getElementById("list");
+// list.addEventListener("click", ev => {
+//     if(ev.target.tagName === "LI"){
+//         ev.target.classList.toggle("checked");
+//         //handleChange(ev, i);
+//     }
+// }, false);
 
 function addTodo() {
     let lenList = todoList.length;
@@ -41,6 +65,7 @@ function addTodo() {
     };
 
     todoList.push(todo);
+    console.log(todoList);
 
     clear();
 
@@ -60,7 +85,7 @@ function deleteTodo(id) {
 }
 
 function handleChange(event, id) {
-    if(event.target.checked){
+    if(event.target.classList.toggle("checked")){
         if(todoList[id].is_checked === false)
             todoList[id].is_checked = true;
     }

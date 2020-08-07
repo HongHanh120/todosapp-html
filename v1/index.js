@@ -41,7 +41,7 @@ function printTodos() {
         checkbox.setAttribute("type", "checkbox");
         checkbox.id = 'checkbox'+ (i + 1);
         checkbox.name = "checkbox";
-        checkbox.addEventListener("change", ev => {
+        checkbox.addEventListener("change", (ev) => {
             handleChange(ev, i);
             updateStorage(ev);
         });
