@@ -15,12 +15,12 @@ retrievedTodoList.forEach((item) => printTodos());
 console.log(retrievedTodoList);
 
 function addTodo() {
-    let lenList = todoList.length;
+    //let lenList = todoList.length;
     if(document.getElementById("todoInput").value === '')
         alert("Your input is empty");
     else {
         let todo = {
-            id: lenList + 1,
+            id: Date.now(),
             content: document.getElementById("todoInput").value,
             is_checked: false
         };
@@ -31,6 +31,7 @@ function addTodo() {
 
         printTodos();
     }
+    console.log(todoList);
 }
 
 function printTodos() {
