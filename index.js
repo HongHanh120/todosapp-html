@@ -1,6 +1,18 @@
 let todoList = sessionStorage.getItem("todoList")
     ? JSON.parse(sessionStorage.getItem("todoList")) : [];
 
+const button = document.querySelector("button");
+
+sessionStorage.setItem("todoList", JSON.stringify(todoList));
+const retrievedTodoList = JSON.parse(sessionStorage.getItem("todoList"));
+
+
+button.addEventListener("click", (ev) => {
+    updateStorage(ev);
+});
+
+retrievedTodoList.forEach((item) => renderTodos());
+
 function renderTodos() {
     let list = document.getElementById("list");
     list.innerText = "";
@@ -14,62 +26,41 @@ function renderTodos() {
         span.appendChild(closeBtn);
         span.addEventListener("click", (ev) => {
             deleteTodo(i);
+            updateStorage(ev);
         });
 
         li.appendChild(document.createTextNode(todoList[i].content));
         li.appendChild(span);
         list.appendChild(li);
 
-        // list.addEventListener("click", ev => {
-        //     if(ev.target.tagName === "LI"){
-        //         handleChange(ev, i);
-        //     }
-        //     //liList[i].checked = todoList[i].is_checked;
-        // });
         let liList = document.querySelectorAll("LI");
         liList[i].addEventListener("click", (ev) => {
             handleChange(ev, i);
+            updateStorage(ev);
         }, false);
-        liList[i] = todoList[i].is_checked;
+        //liList[i] = todoList[i].is_checked;
     }
-
-
-
-    // for(let i = 0; i < todoList.length; i++){
-    //
-    // }
-
-    // list.addEventListener("click", (ev) => {
-    //     if(ev.target === "LI"){
-    //         ev.target.classList.toggle("checked");
-    //     }
-    // })
 }
-// let list = document.getElementById("list");
-// list.addEventListener("click", ev => {
-//     if(ev.target.tagName === "LI"){
-//         ev.target.classList.toggle("checked");
-//         //handleChange(ev, i);
-//     }
-// }, false);
 
 function addTodo() {
-    let lenList = todoList.length;
+    //let lenList = todoList.length;
     let inputValue = document.getElementById("todoInput").value;
     if(inputValue === '')
         alert("Your input is empty");
-    const todo = {
-        id: lenList,
-        content: inputValue,
-        is_checked: false
-    };
+    else {
+        const todo = {
+            id: Date.now(),
+            content: document.getElementById("todoInput").value,
+            is_checked: false
+        };
+        todoList.push(todo);
 
-    todoList.push(todo);
-    console.log(todoList);
+        console.log(todoList);
 
-    clear();
+        clear();
 
-    renderTodos()
+        renderTodos();
+    }
 }
 
 function clear(){
@@ -85,13 +76,19 @@ function deleteTodo(id) {
 }
 
 function handleChange(event, id) {
-    if(event.target.classList.toggle("checked")){
-        if(todoList[id].is_checked === false)
-            todoList[id].is_checked = true;
+    if(event.target.tagName === "LI"){
+        if(event.target.classList.toggle("checked")) {
+            if(todoList[id].is_checked === false)
+                todoList[id].is_checked = true;
+            else
+                todoList[id].is_checked = false;
+        }
+        console.log(todoList[id].is_checked);
     }
-    else{
-        if(todoList[id].is_checked === true)
-            todoList[id].is_checked = false;
-    }
-    console.log(todoList[id].is_checked);
+
+}
+
+function updateStorage(ev) {
+    ev.preventDefault();
+    sessionStorage.setItem("todoList", JSON.stringify(todoList));
 }

@@ -12,6 +12,7 @@ form.addEventListener("click", function (ev) {
 });
 
 retrievedTodoList.forEach((item) => printTodos());
+console.log(retrievedTodoList);
 
 function addTodo() {
     let lenList = todoList.length;
@@ -88,6 +89,8 @@ function printTodos() {
 
         list.appendChild(li);
         displayDefault(i);
+
+        //console.log("hello");
     }
 }
 
