@@ -1,9 +1,6 @@
 .input-todo {
    background: #f44336;
    padding: 30px 40px;
-   text-align: center;
-   color: white;
-   height: 100%;
    /*overflow: auto;*/
 }
 
