@@ -36,10 +36,15 @@ function renderTodos() {
         let liList = document.querySelectorAll("LI");
         liList[i].addEventListener("click", (ev) => {
             handleChange(ev, i);
-            liList[i].checked = todoList[i].is_checked;
             updateStorage(ev);
         });
-        //liList[i].checked = todoList[i].is_checked;
+        if(todoList[i].is_checked === true){
+            liList[i].className ="checked";
+        }
+        else {
+            liList[i].className = liList[i].className.replace(/\bchecked\b/g, "")
+            // liList[i].classList.remove("checked");
+        }
     }
 }
 
@@ -92,7 +97,6 @@ function handleChange(event, id) {
         }
         console.log(todoList[id].is_checked);
     }
-
 }
 
 function updateStorage(ev) {
