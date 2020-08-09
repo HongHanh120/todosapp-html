@@ -36,9 +36,10 @@ function renderTodos() {
         let liList = document.querySelectorAll("LI");
         liList[i].addEventListener("click", (ev) => {
             handleChange(ev, i);
+            liList[i].checked = todoList[i].is_checked;
             updateStorage(ev);
-        }, false);
-        //liList[i] = todoList[i].is_checked;
+        });
+        //liList[i].checked = todoList[i].is_checked;
     }
 }
 
@@ -82,6 +83,12 @@ function handleChange(event, id) {
                 todoList[id].is_checked = true;
             else
                 todoList[id].is_checked = false;
+        }
+        else {
+            if(todoList[id].is_checked === true)
+                todoList[id].is_checked = false;
+            else
+                todoList[id].is_checked = true;
         }
         console.log(todoList[id].is_checked);
     }
