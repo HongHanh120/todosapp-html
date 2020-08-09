@@ -5,18 +5,18 @@
     <title>Todos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
 <div class="top">
-    <h1>Todos App</h1>
 </div>
 <div class="middle">
-    <form>
-        <label for="todoInput">New Todo:</label><br>
-        <input placeholder="Title..." type="text" id="todoInput" name="newTodo">
-        <button id="addBtn" onclick="addTodo()">Add</button>
+    <form class="new-todo-form">
+        <label for="todoInput" class="new-todo-label">New Todo:</label><br>
+        <input placeholder="Title..." type="text" id="todoInput" class="new-todo-input">
+        <button id="addBtn" onclick="addTodo()" class="new-todo-button">Add</button>
     </form>
-    <ul id="list">
+    <ul id="list" class="todo-list">
     </ul>
 </div>
 <div class="bottom">
