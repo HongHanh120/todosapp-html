@@ -49,7 +49,6 @@ function renderTodos() {
 }
 
 function addTodo() {
-    //let lenList = todoList.length;
     let inputValue = document.getElementById("todoInput").value;
     if(inputValue === '')
         alert("Your input is empty");
