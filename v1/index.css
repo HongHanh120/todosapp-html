@@ -18,7 +18,7 @@ button {
 .new-todo-form {
     display: block;
     border: 1px solid white;
-    padding: 15px;
+    padding: 10px;
     width: 500px;
     margin-top: -40px;
     border-radius: 3px;
@@ -28,6 +28,12 @@ button {
     align: center;
     margin-left: auto;
     margin-right: auto
+}
+
+.new-todo-form:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .new-todo-label {
@@ -42,16 +48,18 @@ button {
 
 .new-todo-input {
     width: 80%;
-    padding: 7px;
+    padding: 5px 10px;
     border: 1px solid lightgrey;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: -10px;
+    float: left;
 }
 
 .new-todo-button {
+    margin-left: 10px;
     font-size: 14px;
-    width: 19%;
+    width: 17%;
     background: #FF33AE;
     color: white;
     padding: 6px 16px;
@@ -59,6 +67,7 @@ button {
     border: 1px solid #FF33AE;
     font-weight: bold;
     margin-top: -10px;
+    float: right;
 }
 
 ul {
@@ -93,12 +102,14 @@ label.custom-control-label {
     width: 80%;
     cursor: pointer;
     word-break: break-word;
+    top: 3px;
 }
 
 label.custom-control-label::before, label.custom-control-label::after{
     right: 0;
     left: -10px;
     float: left;
+
 }
 
 .custom-control-label:before{
@@ -108,17 +119,51 @@ label.custom-control-label::before, label.custom-control-label::after{
     background-color:#FF33AE;
 }
 
-.fa-pencil::before, .fa-pencil::after {
-    color: #FF33AE;
-    margin: 15px;
-    cursor: pointer;
-}
-
 .fa-trash::before, .fa-trash::after {
     color: #FF33AE;
-    margin: 15px;
+    margin: 5px 12px;
     cursor: pointer;
+    float: right;
 }
+
+.fa-pencil::before, .fa-pencil::after {
+    color: #FF33AE;
+    margin: 5px 12px;
+    cursor: pointer;
+    float: right;
+}
+
+.edit-todo-label {
+    font-size: 14px;
+    left: 15px;
+    margin: 8px 10px 0 -9px;
+    float: left;
+    text-align: left;
+}
+
+.edit-todo-input {
+    font-size: 14px;
+    padding: 7px;
+    width: 76%;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+.edit-todo-button {
+    width: 15%;
+    background: white;
+    border: 1px solid #FF33AE;
+    border-radius: 3px;
+    color: #FF33AE;
+    font-size: 14px;
+    padding: 7px 0;
+    float: right;
+    right: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+
 
 
 

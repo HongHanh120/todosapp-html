@@ -56,10 +56,6 @@ function printTodos() {
         label.innerHTML = todoList[i].content;
         label.className = "custom-control-label";
 
-        let pencilSpan = document.createElement("SPAN");
-        pencilSpan.className = "fa fa-pencil";
-        pencilSpan.onclick = () => editContent(i);
-
         let trashSpan = document.createElement("SPAN");
         trashSpan.className = "fa fa-trash";
         trashSpan.addEventListener("click", ev => {
@@ -67,18 +63,25 @@ function printTodos() {
             updateStorage(ev);
         });
 
+        let pencilSpan = document.createElement("SPAN");
+        pencilSpan.className = "fa fa-pencil";
+        pencilSpan.onclick = () => editContent(i);
+
         let inputText = document.createElement("INPUT");
         inputText.setAttribute("type", "text");
         inputText.id = "text" + (i + 1);
+        inputText.className = "edit-todo-input";
 
         let labelEdit = document.createElement("LABEL");
         labelEdit.htmlFor = inputText.id;
         labelEdit.innerHTML = "Edit: ";
         labelEdit.id = "label" + (i + 1);
+        labelEdit.className = "edit-todo-label";
 
         let saveButton = document.createElement("BUTTON");
         saveButton.id = "button" + (i + 1);
         saveButton.innerHTML = "Save";
+        saveButton.className = "edit-todo-button";
 
 
         let li = document.createElement("LI");
@@ -86,8 +89,8 @@ function printTodos() {
 
         li.appendChild(checkbox);
         li.appendChild(label);
-        li.appendChild(pencilSpan);
         li.appendChild(trashSpan);
+        li.appendChild(pencilSpan);
         li.appendChild(labelEdit);
         li.appendChild(inputText);
         li.appendChild(saveButton);
