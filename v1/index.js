@@ -48,18 +48,20 @@ function printTodos() {
             updateStorage(ev);
         });
         checkbox.checked = todoList[i].is_checked;
+        checkbox.className = "custom-control-input";
 
         let label = document.createElement("LABEL");
         label.id = 'content'+ (i + 1);
         label.htmlFor = checkbox.id;
         label.innerHTML = todoList[i].content;
+        label.className = "custom-control-label";
 
         let pencilSpan = document.createElement("SPAN");
-        pencilSpan.className = "glyphicon glyphicon-pencil";
+        pencilSpan.className = "fa fa-pencil";
         pencilSpan.onclick = () => editContent(i);
 
         let trashSpan = document.createElement("SPAN");
-        trashSpan.className = "glyphicon glyphicon-trash";
+        trashSpan.className = "fa fa-trash";
         trashSpan.addEventListener("click", ev => {
             deleteTodo(i);
             updateStorage(ev);
@@ -80,6 +82,8 @@ function printTodos() {
 
 
         let li = document.createElement("LI");
+        li.className = "custom-control custom-checkbox";
+
         li.appendChild(checkbox);
         li.appendChild(label);
         li.appendChild(pencilSpan);
@@ -125,14 +129,14 @@ function handleChange(event, id){
         if(todoList[id].is_checked === true)
             todoList[id].is_checked = false;
     }
-    //console.log(todoList[id].is_checked)
+    console.log(todoList[id].is_checked)
 }
 
 function displayDefault(id) {
     document.getElementById("checkbox" + (id + 1)).style.display = "inline";
     document.getElementById("content" + (id + 1)).style.display = "inline";
-    document.getElementsByClassName("glyphicon glyphicon-pencil")[id].style.display = "inline";
-    document.getElementsByClassName("glyphicon glyphicon-trash")[id].style.display = "inline";
+    document.getElementsByClassName("fa fa-pencil")[id].style.display = "inline";
+    document.getElementsByClassName("fa fa-trash")[id].style.display = "inline";
 
     document.getElementById("label" + (id + 1)).style.display = "none";
     document.getElementById("text" + (id + 1)).style.display = "none";
@@ -142,8 +146,8 @@ function displayDefault(id) {
 function showEditForm(id) {
     document.getElementById("checkbox" + (id + 1)).style.display = "none";
     document.getElementById("content" + (id + 1)).style.display = "none";
-    document.getElementsByClassName("glyphicon glyphicon-pencil")[id].style.display = "none";
-    document.getElementsByClassName("glyphicon glyphicon-trash")[id].style.display = "none";
+    document.getElementsByClassName("fa fa-pencil")[id].style.display = "none";
+    document.getElementsByClassName("fa fa-trash")[id].style.display = "none";
 
     document.getElementById("label" + (id + 1)).style.display = "inline";
     document.getElementById("text" + (id + 1)).style.display = "inline";
